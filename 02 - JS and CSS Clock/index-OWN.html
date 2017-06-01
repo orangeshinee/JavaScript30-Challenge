@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title> Clock Demo </title>
+</head>
+<body>
+
+    <div class="clock">
+        <div class="clock-face"> <!--the apperace of the clock -->
+            <div class="hand hour-hand" style="background: red"></div>
+            <div class="hand min-hand" style="background: yellow"></div>
+            <div class="hand second-hand"></div>
+        </div>
+    </div>
+
+    <style>
+        html {
+            background: white;
+            background-size: cover;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        body{
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .clock {
+            width: 30rem;
+            height: 30rem;
+            border: 5px solid skyblue;
+            border-radius: 50%; /* 弧度*/
+            position: relative;
+            margin: 50px auto;
+            padding: 1rem;
+           
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+        }
+
+        .hand {
+            width: 50%;
+            height: 4px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%; 
+            /*make the hand rotate with the center on the right*/
+            transition: all 0.05s;
+            transform: rotate(90deg);
+            transition-timing-function: cubic-bezier(0, 1.62, 1, 2.29);
+        }
+    </style>
+
+    <script>//脚本动作
+        const handsecond = document.querySelector('.second-hand');
+        const handmin = document.querySelector('.min-hand');
+        const handhour = document.querySelector('.hour-hand');      
+
+        function setDate()
+        {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const secdegrees = (seconds/60* 360)+90;
+            handsecond.style.transform = `rotate(${secdegrees}deg)`;
+
+            const mins = now.getMinutes();
+            const mindegrees = (mins/60*360)+90+(seconds/10);
+            handmin.style.transform = `rotate(${mindegrees}deg)`;
+
+            const hours = now.getHours();
+            const hourdegrees=(hours/12*360)+90+(mins/2);
+            handhour.style.transform = `rotate(${hourdegrees}deg)`;
+
+        }
+
+        setInterval(setDate,1000);//每秒运行一次setDate
+        setDate();
+    </script>
+
+
+
+
+</body>
+</html>
