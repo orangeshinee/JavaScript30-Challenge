@@ -2,7 +2,7 @@
 >author：[shineee](https://github.com/orangeshinee) \
 >创建时间：20170602
 
-## [在线效果](http://blog.shineee.win/JavaScript30-Challenge/02%20-%20JS%20and%20CSS%20Clock/index-OWN.html)
+## [在线效果](http://blog.shineee.win/JavaScript30-Challenge/02%20-%20JS%20and%20CSS%20Clock/index-shine.html)
 
 ![clock](http://oekt5d96o.bkt.clouddn.com/17-6-2/19883232.jpg)
 
