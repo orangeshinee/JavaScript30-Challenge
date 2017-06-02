@@ -18,7 +18,7 @@
 
     <style>
         html {
-            background: white;
+            background: white url("http://oekt5d96o.bkt.clouddn.com/17-6-2/19744802.jpg");
             background-size: cover;
             font-family: Georgia, 'Times New Roman', Times, serif;
             text-align: center;
@@ -48,7 +48,19 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+        }
+
+        .clock-face::after{
+            content: "";
+           width: 1em;
+           height: 1em;
+           background: skyblue;
+           position: absolute;
+           border-radius: 50%;
+           top: 50%;
+           left: 50%;
+          transform: translate(-50%, -50%);/*top：50%;left:50%;对齐的是左上角，应该在向左上移动自身尺寸的50%*/
         }
 
         .hand {
@@ -61,8 +73,20 @@
             /*make the hand rotate with the center on the right*/
             transition: all 0.05s;
             transform: rotate(90deg);
-            transition-timing-function: cubic-bezier(0, 1.62, 1, 2.29);
+            transition-timing-function: cubic-bezier(0, 1.54, 1, 2.46)    ;
         }
+
+        .min-hand {
+            width: 36%;/*更改分针长度 下同*/
+            margin-left: 14%;
+        }
+
+        .hour-hand{
+            width: 24%;
+            margin-left: 26%;
+        }
+
+
     </style>
 
     <script>//脚本动作
@@ -76,11 +100,22 @@
             const seconds = now.getSeconds();
             const secdegrees = (seconds/60* 360)+90;
             handsecond.style.transform = `rotate(${secdegrees}deg)`;
+            
+            /*
+            解决指针到12点时角度突变问题
+            当指针指向12点时，角度从450度突变到90，所以在这里添加一个if
+            当角度为90时，transtion的时间为0 即停止旋转
+            */
+            if (secdegrees === 90) handsecond.style.transition = 'all 0s';
+            else handsecond.style.transition = 'all .05s';
 
             const mins = now.getMinutes();
             const mindegrees = (mins/60*360)+90+(seconds/10);
             handmin.style.transform = `rotate(${mindegrees}deg)`;
 
+            if (mindegrees === 90) handmin.style.transition = 'all 0s';
+            else handmin.style.transition = 'all 0.05s';
+            
             const hours = now.getHours();
             const hourdegrees=(hours/12*360)+90+(mins/2);
             handhour.style.transform = `rotate(${hourdegrees}deg)`;
