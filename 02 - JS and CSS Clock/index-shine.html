@@ -3,8 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title> Clock Demo </title>
+        <title> Clock Demo </title>
 </head>
 <body>
 
@@ -29,6 +28,7 @@
             margin: 0;
             font-size: 2rem;
             display: flex;
+            flex: 1;
             min-height: 100vh;
             align-items: center;
         }
@@ -71,19 +71,26 @@
             top: 50%;
             transform-origin: 100%; 
             /*make the hand rotate with the center on the right*/
-            transition: all 0.05s;
+            transition: all 1.5s;
             transform: rotate(90deg);
-            transition-timing-function: cubic-bezier(0, 1.54, 1, 2.46)    ;
+             box-shadow:/*指针阴影*/
+                0 0 0 .1px #fff,
+                0 0 0 0.5px rgba(0,0,0,0.1),
+                0 0 0.5px rgba(0,0,0,0.4),
+                2px 3.5px .5px rgba(0, 0, 0, .5);
+            transition-timing-function: cubic-bezier(0.9, 0.54, 0.26, 1.68)    ;
         }
 
         .min-hand {
             width: 36%;/*更改分针长度 下同*/
             margin-left: 14%;
+            transition: all 2s; /*初始化转动时间 下同*/
         }
 
         .hour-hand{
             width: 24%;
             margin-left: 26%;
+            transition: all 3s;
         }
 
 
@@ -107,23 +114,23 @@
             当角度为90时，transtion的时间为0 即停止旋转
             */
             if (secdegrees === 90) handsecond.style.transition = 'all 0s';
-            else handsecond.style.transition = 'all .05s';
+            else handsecond.style.transition = 'all .5s';
 
             const mins = now.getMinutes();
-            const mindegrees = (mins/60*360)+90+(seconds/10);
+            const mindegrees = (mins/60*360)+90;
             handmin.style.transform = `rotate(${mindegrees}deg)`;
 
             if (mindegrees === 90) handmin.style.transition = 'all 0s';
-            else handmin.style.transition = 'all 0.05s';
+            else handmin.style.transition = 'all 0.15s';
             
             const hours = now.getHours();
-            const hourdegrees=(hours/12*360)+90+(mins/2);
+            const hourdegrees=((hours/12)*360)+90+((mins/60)*30)-360;
             handhour.style.transform = `rotate(${hourdegrees}deg)`;
 
         }
 
         setInterval(setDate,1000);//每秒运行一次setDate
-        setDate();
+        
     </script>
 
 
