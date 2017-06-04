@@ -117,7 +117,8 @@
 ```
 - 相关方法
  
-  HTML5向Web API新引入了document.querySelector以及document.querySelectorAll两个方法用来更方便地从DOM选取元素，功能类似于jQuery的选择器。
+  HTML5向Web API新引入了document.querySelector以及document.querySelectorAll两个方法用来更方便地从DOM选取元素，功能类似于jQuery的选择器。<br>
+  W3School关于方法的[解释说明](https://www.w3schools.com/jsref/met_document_queryselector.asp)。
 ```javascript
     document.querySelector()
     /*该方法返回满足条件的单个元素。
