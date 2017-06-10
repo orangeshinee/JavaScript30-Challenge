@@ -33,7 +33,25 @@
 function handleUpdate(){
         //获取suffix为单位px。当无单位时则为空
         const suffix = this.dataset.sizing || '';
-        
         document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
     }
 ```
+
+### 主要方法及属性
+```css
+filter: blur(10px)
+```
+- filter是一个强大的滤镜，包括blur(模糊)、brightness(亮度)、contrast(对比度)、drop-shadow(阴影)等等。详见[参考文献](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)。
+
+
+```javascript
+document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
+```
+- 设置属性并赋值。因为this.value只是数值，但是blur和spacing都有单位px，所以要加上单位suffix，即this.dataset.sizing。
+```javascript
+inputs.forEach(input => input.addEventListener('change',handleUpdate));
+inputs.forEach(input => input.addEventListener('mousemove',handleUpdate));
+```
+- 鼠标有两个监听事件
+- 1. <b>change</b> | 该事件仅适用于文本域（text field），以及 textarea 和 select 元素。在鼠标选择color时，此事件发生。
+- 2. <b>mousemove</b> | 在滑块移动的时候监听值改变，以此改变全局CSS变量。
